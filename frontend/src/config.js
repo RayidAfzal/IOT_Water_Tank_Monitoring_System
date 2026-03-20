@@ -11,3 +11,5 @@ export default {
   PREDICT_URL: `${API_BASE_URL}/api/v1/predict`,
   MODEL_INFO_URL: `${API_BASE_URL}/api/v1/model-info`,
 };
+
+export default config;
