@@ -425,24 +425,31 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchNodes();
-  }, []);
+  fetchNodes();
+  fetchSensorData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
-  useEffect(() => {
-    if (selectedNode) {
-      fetchSensorData();
-    }
-  }, [selectedNode, selectedTimeRange, customFromDate, customToDate, nodes]);
+useEffect(() => {
+  if (selectedNode) {
+    fetchSensorData();
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [selectedNode]);
 
-  useEffect(() => {
-    if (!selectedNode) return;
+useEffect(() => {
+  if (selectedTimeRange && selectedNode) {
+    fetchSensorData();
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [selectedTimeRange]);
 
-    const interval = setInterval(() => {
-      fetchSensorData();
-    }, 30000);
-
-    return () => clearInterval(interval);
-  }, [selectedNode, selectedTimeRange, customFromDate, customToDate, nodes]);
+useEffect(() => {
+  if (selectedTimeRange === 'custom' && customFromDate && customToDate && selectedNode) {
+    fetchSensorData();
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [customFromDate, customToDate]);
 
   return (
     <div className="home-page">
