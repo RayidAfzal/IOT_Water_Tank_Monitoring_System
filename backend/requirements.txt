@@ -6,3 +6,4 @@ pydantic
 python-dotenv
 numpy
 joblib
+scikit-learn
